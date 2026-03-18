@@ -15,19 +15,24 @@ USE [DatnMovieTicketing];
 GO
 
 -- ==========================================
--- MODULE 1: QUẢN LÝ NGƯỜI DÙNG
+-- MODULE 1: QUẢN LÝ KHÁCH HÀNG & NHÂN SỰ
 -- ==========================================
+
+CREATE TABLE [vai_tro] (
+  [id] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
+  [ma] VARCHAR(50) NOT NULL UNIQUE, 
+  [ten] NVARCHAR(100) NOT NULL, 
+);
 
 CREATE TABLE [hang_thanh_vien] (
   [id] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
   [ma] VARCHAR(50) NULL,
   [ten] NVARCHAR(100) NULL,
   [diem_toi_thieu] INT DEFAULT 0,
-  [mo_ta] NVARCHAR(255) NULL,
   [ngay_tao] DATETIME DEFAULT GETDATE()
 );
 
-CREATE TABLE [nguoi_dung] (
+CREATE TABLE [khach_hang] (
   [id] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
   [hang_thanh_vien_id] UNIQUEIDENTIFIER NULL,
   [ma] VARCHAR(50) NULL,
@@ -41,20 +46,35 @@ CREATE TABLE [nguoi_dung] (
   [provider_id] VARCHAR(255) NULL, 
   [hinh_anh_dai_dien] VARCHAR(500) NULL,
   [diem_tich_luy] INT DEFAULT 0,
-  [vai_tro] VARCHAR(50) NOT NULL DEFAULT 'KHACH_HANG', 
   [trang_thai] INT DEFAULT 1, 
   [ngay_tao] DATETIME DEFAULT GETDATE(),
-  CONSTRAINT [uq_nguoi_dung_email] UNIQUE ([email]),
-  CONSTRAINT [fk_nguoi_dung_hang] FOREIGN KEY ([hang_thanh_vien_id]) REFERENCES [hang_thanh_vien] ([id])
+  CONSTRAINT [uq_khach_hang_email] UNIQUE ([email]),
+  CONSTRAINT [fk_khach_hang_hang] FOREIGN KEY ([hang_thanh_vien_id]) REFERENCES [hang_thanh_vien] ([id])
+);
+
+CREATE TABLE [nhan_vien] (
+  [id] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
+  [vai_tro_id] UNIQUEIDENTIFIER NOT NULL,
+  [ma] VARCHAR(50) NULL,
+  [ho_ten] NVARCHAR(100) NOT NULL,
+  [email] VARCHAR(255) NOT NULL,
+  [mat_khau] VARCHAR(255) NOT NULL, 
+  [ngay_sinh] DATE NULL,
+  [gioi_tinh] INT NULL, 
+  [so_dien_thoai] VARCHAR(20) NULL,
+  [hinh_anh_dai_dien] VARCHAR(500) NULL,
+  [trang_thai] INT DEFAULT 1, 
+  [ngay_tao] DATETIME DEFAULT GETDATE(),
+  CONSTRAINT [uq_nhan_vien_email] UNIQUE ([email]),
+  CONSTRAINT [fk_nhan_vien_vai_tro] FOREIGN KEY ([vai_tro_id]) REFERENCES [vai_tro] ([id])
 );
 
 CREATE TABLE [quen_mat_khau] (
   [id] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
-  [nguoi_dung_id] UNIQUEIDENTIFIER NOT NULL,
+  [email] VARCHAR(255) NOT NULL, 
   [ma_token] VARCHAR(255) NOT NULL,
   [thoi_gian_het_han] DATETIME NOT NULL,
-  CONSTRAINT [uq_quen_mat_khau_token] UNIQUE ([ma_token]),
-  CONSTRAINT [fk_quen_mat_khau_nguoi_dung] FOREIGN KEY ([nguoi_dung_id]) REFERENCES [nguoi_dung] ([id]) ON DELETE CASCADE
+  CONSTRAINT [uq_quen_mat_khau_token] UNIQUE ([ma_token])
 );
 
 -- ==========================================
@@ -102,7 +122,7 @@ CREATE TABLE [phim] (
   [hinh_anh_poster] VARCHAR(500) NULL,
   [hinh_anh_banner] VARCHAR(500) NULL,
   [trailer_url] VARCHAR(500) NULL,
-  [mo_ta] NVARCHAR(MAX) NULL, -- Giữ MAX cho tóm tắt phim
+  [mo_ta] NVARCHAR(MAX) NULL, 
   [trang_thai] INT DEFAULT 1, 
   [ngay_tao] DATETIME DEFAULT GETDATE(),
   CONSTRAINT [fk_phim_phan_loai] FOREIGN KEY ([phan_loai_do_tuoi_id]) REFERENCES [phan_loai_do_tuoi] ([id])
@@ -143,12 +163,12 @@ CREATE TABLE [phim_dien_vien] (
 CREATE TABLE [danh_gia_phim] (
   [id] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
   [phim_id] UNIQUEIDENTIFIER NOT NULL,
-  [nguoi_dung_id] UNIQUEIDENTIFIER NOT NULL,
+  [khach_hang_id] UNIQUEIDENTIFIER NOT NULL, 
   [diem_so] INT NOT NULL, 
-  [binh_luan] NVARCHAR(255) NULL, -- Đánh giá ngắn dùng 255
+  [binh_luan] NVARCHAR(255) NULL, 
   [ngay_tao] DATETIME DEFAULT GETDATE(),
   CONSTRAINT [fk_danhgia_phim] FOREIGN KEY ([phim_id]) REFERENCES [phim] ([id]) ON DELETE CASCADE,
-  CONSTRAINT [fk_danhgia_nguoidung] FOREIGN KEY ([nguoi_dung_id]) REFERENCES [nguoi_dung] ([id]) ON DELETE CASCADE
+  CONSTRAINT [fk_danhgia_khachhang] FOREIGN KEY ([khach_hang_id]) REFERENCES [khach_hang] ([id]) ON DELETE CASCADE
 );
 
 -- ==========================================
@@ -171,7 +191,7 @@ CREATE TABLE [phong_chieu] (
   [ma] VARCHAR(50) NULL,
   [ten] NVARCHAR(100) NOT NULL,
   [suc_chua] INT DEFAULT 0,
-  [loai_may_chieu] NVARCHAR(100) NULL,
+  [loai_may_chieu] int DEFAULT 0,
   [trang_thai] INT DEFAULT 1, 
   CONSTRAINT [fk_phong_rap] FOREIGN KEY ([rap_chieu_id]) REFERENCES [rap_chieu] ([id]) ON DELETE CASCADE
 );
@@ -257,7 +277,8 @@ CREATE TABLE [khuyen_mai] (
 
 CREATE TABLE [hoa_don] (
   [id] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
-  [nguoi_dung_id] UNIQUEIDENTIFIER NOT NULL,
+  [khach_hang_id] UNIQUEIDENTIFIER NOT NULL, 
+  [nhan_vien_id] UNIQUEIDENTIFIER NULL, 
   [khuyen_mai_id] UNIQUEIDENTIFIER NULL,
   [ma_hoa_don] VARCHAR(100) NOT NULL,
   [tong_tien_ban_dau] DECIMAL(38,2) NOT NULL DEFAULT 0,
@@ -269,7 +290,8 @@ CREATE TABLE [hoa_don] (
   [thoi_gian_het_han_giu_ghe] DATETIME NULL,
   [trang_thai] INT DEFAULT 0, 
   CONSTRAINT [uq_hoa_don_ma] UNIQUE ([ma_hoa_don]),
-  CONSTRAINT [fk_hd_nguoi_dung] FOREIGN KEY ([nguoi_dung_id]) REFERENCES [nguoi_dung] ([id]),
+  CONSTRAINT [fk_hd_khach_hang] FOREIGN KEY ([khach_hang_id]) REFERENCES [khach_hang] ([id]),
+  CONSTRAINT [fk_hd_nhan_vien] FOREIGN KEY ([nhan_vien_id]) REFERENCES [nhan_vien] ([id]),
   CONSTRAINT [fk_hd_khuyen_mai] FOREIGN KEY ([khuyen_mai_id]) REFERENCES [khuyen_mai] ([id])
 );
 
