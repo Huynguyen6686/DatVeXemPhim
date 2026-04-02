@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 1</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <!-- Navigation bar -->
+    <div class="bg-success">
+        <!-- Cú pháp khai báo navigation bar -->
+        <nav class="navbar navbar-expand-sm">
+            <!-- Nút toggle để xổ menu khi trên trình duyệt điện thoại -->
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#myNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse p-2" id="myNav">
+                <ul class="navbar-nav d-flex gap-3">
+                    <li class="fw-bold nav-item">Ăn chơi</li>
+                    <li class="fw-bold nav-item">Uống bia</li>
+                    <li class="fw-bold nav-item">Bắn bia</li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Card -->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-8">
+                <!-- Khai báo Card -->
+                <div class="card">
+                    <img src="./card1.jpg" width="100%" class="card-img-top" />
+                    <div class="card-header text-center">Dân chơi-er</div>
+                    <div class="card-body">
+                        <p class="text-info">Tôi muốn được đi ăn đi chơi 😎</p>
+                    </div>
+                    <div class="card-footer">
+                        <p class="text-dark">Bản quyền thuộc dân chơi</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="row">
+                    <div class="col-6">
+                        <!-- Khai báo Card -->
+                        <div class="card">
+                            <img src="./card1.jpg" width="100%" class="card-img-top" />
+                            <div class="card-header text-center">Dân chơi-er</div>
+                            <div class="card-body">
+                                <p class="text-info">Tôi muốn được đi ăn đi chơi 😎</p>
+                            </div>
+                            <div class="card-footer">
+                                <p class="text-dark">Bản quyền thuộc dân chơi</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <!-- Ví dụ về List group -->
+                        <ul class="list-group">
+                            <li class="list-group-item active">Biết ăn</li>
+                            <li class="list-group-item">Biết chơi</li>
+                            <li class="list-group-item">Biết uống bia</li>
+                            <li class="list-group-item">
+                                <div class="d-flex justify-content-around">
+                                    <p>Số cốc bia uống được</p>
+                                    <p class="fw-bold">10</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Ví dụ table -->
+    <div class="container mt-4">
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr class="text-center text-info fw-bold">
+                    <td class="bg-success">Số thứ tự</td>
+                    <td class="bg-success">Tên món</td>
+                    <td class="bg-success">Ảnh minh chứng</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        1
+                    </td>
+                    <td>
+                        Đậu tẩm hành
+                    </td>
+                    <td>
+                        <img src="1.JPG" width="100" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        2
+                    </td>
+                    <td>
+                        Chim câu xúc phồng tôm
+                    </td>
+                    <td>
+                        <img src="2.JPG" width="100" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        3
+                    </td>
+                    <td>
+                        ba chỉ dòn ròn giòn bì
+                    </td>
+                    <td>
+                        <img src="1.JPG" width="100" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center fw-bold">
+                        Tổng tiền
+                    </td>
+                    <td colspan="2" class="text-danger text-center fw-bold">
+                        5,000,000 VNĐ
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Ví dụ Form -->
+    <!-- ví dụ về tab -->
+    
+    <div class="row">
+
+    </div>
+    <button class="btn btn-danger" data-bs-toggle="collapse" data-bs-target="#mylove">Thcáh bấm vào đây</button>
+    <div id="mylove" class="collapse">
+        <div class="card">
+            <div class="card-body">
+                <p class="alert alert-danger">Ối dồi ôi lộ hêts rồi</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="nav nav-tabs" role="tablist">
+            <div class="nav-item">
+                <a data-bs-toggle="tab" href="#dangky" class="nav-link active">Đăng ký</a>
+            </div>
+            <div class="nav-item">
+                <a data-bs-toggle="tab" href="#thongtin" class="nav-link">Thông tin</a>
+            </div>
+            <div class="nav-item">
+                <a data-bs-toggle="tab" href="#umbala" class="nav-link">Úm ba la</a>
+            </div>
+        </div>
+        <div class="tab-content">
+            <div id="dangky" class="col-4 tab-pane active">
+
+                <form class="d-flex flex-column gap-3 was-validated">
+                    <h4>Đơn đăng ký tuyển thành viên clb Nhậu</h4>
+                    <div>
+                        <label class="form-label">Tên của bạn</label>
+                        <input type="text" class="form-control" placeholder="tên của mày" required />
+                    </div>
+                    <div>
+                        <label class="form-label">Ngày tháng năm sinh của đồng chí</label>
+                        <input type="date" class="form-control" required />
+                    </div>
+                    <div>
+                        <label class="form-label">SĐT để say còn chở về</label>
+                        <input type="tel" class="form-control" required />
+                    </div>
+                    <div>
+                        <label class="form-label">Có bao nhiêu tệp đính kèm</label>
+                        <select class="form-select">
+                            <option>Một mình chấp hết</option>
+                            <option>Có thằng bạn</option>
+                            <option>Có tổ đội</option>
+                        </select>
+                    </div>
+                    <div class="form-check">
+                        <p class="form-label">Đi bằng phương tiện gì ?</p>
+                        <div>
+                            <input type="checkbox" class="form-check-input" value="1" name="phuongtien" />
+                            <label class="form-check-label">2 cẳng</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="form-check-input" value="2" name="phuongtien" />
+                            <label class="form-check-label">Khối phân lớn</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="form-check-input" value="3" name="phuongtien" />
+                            <label class="form-check-label">Bốn bánh</label>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="form-label">Có ngủ lại qua đêm không ?</p>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" value="1" name="ngu" />
+                            <label class="form-check-label">Không bao giờ</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" value="2" name="ngu" />
+                            <label class="form-check-label">Suy nghĩ đã</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" value="3" name="ngu" />
+                            <label class="form-check-label">Có ai ngủ cùng ?</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="form-label">Gửi CCCD làm tin</label>
+                        <input type="file" class="form-control" />
+                    </div>
+                    <div class="btn-group">
+                        <button type="submit" class="btn btn-outline-secondary">Tôi chán sống</button>
+                        <button type="button" class="btn btn-success">Tôi muốn sống</button>
+                        <button type="reset" class="btn btn-danger">Làm mới </button>
+                    </div>
+                </form>
+            </div>
+            <div id="thongtin" class="col-4 tab-pane fade">
+                <button type="button" class="mt-4 btn btn-success" data-bs-toggle="modal" data-bs-target="#chitiet">
+                    Ấn vào đây</button>
+                <div class="modal" id="chitiet">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header d-flex justify-content-between">
+                                <h4>Thông tin mật của Nhậu-er</h4>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Đóng</button>
+                            </div>
+                            <div class="modal-body">
+                                <h3 class="text-info">Nhậu-er này uống khoẻ lắm, đây là bí mật</h3>
+                                <img src="./dautamhanh.jpg" width="100" />
+                            </div>
+                            <div class="modal-footer text-dark d-flex justify-content-center">
+                                <h5>Nhớ giữ bí mật đấy</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="umbala" class="col-4 tab-pane fade">
+                <p>á đù má m</p>
+            </div>
+
+
+
+
+
+        </div>
+
+        <!-- <div class="text-bg-info">
+        <h1>Header</h1>
+    </div>
+    <div class="text-bg-info container-md container-xxl">
+        <p class="text-danger">Hello world</p>
+        <p class="text-info">Hello world 1</p>
+        <p class="text-primary">Hello world 2</p>
+        <p class="text-secondary">Hello world 2</p>
+        <p class="text-light">Hello world 3</p>
+        <p class="text-dark">Hello world 3</p>
+    </div>
+    <div class="container-fluid text-bg-danger">
+        <p>Bye bye world</p>
+    </div> -->
+        <!-- Ví dụ về chia layout trong Bootstrap -->
+        <!-- <div class="row">
+        <p class="text-bg-info col-4">hàng có 3 phần, mỗi phần 4 ô</p>
+        <p class="text-bg-primary col-4">hàng có 3 phần, mỗi phần 4 ô</p>
+        <p class="text-bg-secondary col-4">hàng có 3 phần, mỗi phần 4 ô</p>
+    </div> -->
+        <!-- Ví dụ về chia layout, trong đó tỉ lệ chia 6 phần -->
+        <!-- Nếu muốn chia responsive với flexbox, dùng cú pháp col-[sm,md,...]-[số] -->
+        <!-- <div class="row">
+        <div class="col-4"><img src="./anh1.png" width="100%" /></div>
+        <div class="col-6"><img src="./anh2.webp" width="100%" /></div>
+    </div>
+    <div class="text-bg-info">
+        <h1>Footer</h1>
+    </div> -->
+</body>
+
+</html>
